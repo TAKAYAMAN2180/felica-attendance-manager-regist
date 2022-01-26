@@ -81,7 +81,7 @@ public class FelicaReader implements Runnable {
                         this.main.process(this.studentNum, studentName);
                     }
                 } else {
-                    try (InputStream is = new FileInputStream(new File("「ブッブー」.mp3"))) {
+                    try (InputStream is = new FileInputStream(new File("badMusic.mp3"))) {
                         this.main.play(is);
                     } catch (FileNotFoundException fileNotFoundException) {
                         System.out.println("fileNotFoundException");

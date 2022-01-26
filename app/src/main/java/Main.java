@@ -201,10 +201,10 @@ public class Main extends JFrame implements ActionListener, WindowListener {
         this.temStudentNum = studentNum;
         if (this.IS_ENTRANCE) {
             this.labelForInfo.setText("受け付けました。");
-            musicFilePath = "ドンドンパフパフ.mp3";
+            musicFilePath = "celebrationMusic.mp3";
         } else {
             this.labelForInfo.setText("受け付けました。お疲れ様でした。");
-            musicFilePath = "「お疲れ様でした」.mp3";
+            musicFilePath = "farewellGreeting.mp3";
         }
         if (this.IS_ENTRANCE) {
             //体温記録表が提出されているかの確認
@@ -254,7 +254,7 @@ public class Main extends JFrame implements ActionListener, WindowListener {
                     try {
                         msg = cellOfMsg.getStringCellValue();
                         //音声を流し、ラベルを変更したうえで終了
-                        musicFilePath = "エラー.mp3";
+                        musicFilePath = "errSound.mp3";
                         this.labelForMsg.setText(msg);
                         break;
                     } catch (NullPointerException ex) {
@@ -264,7 +264,7 @@ public class Main extends JFrame implements ActionListener, WindowListener {
                         try {
                             msg = cellOfMsg.getStringCellValue();
                             //音声を流し、ラベルを変更したうえで終了
-                            musicFilePath = "エラー.mp3";
+                            musicFilePath = "errSound.mp3";
                             this.labelForMsg.setText(msg);
                             break;
                         } catch (IllegalArgumentException illegalArgumentException1) {
@@ -275,7 +275,7 @@ public class Main extends JFrame implements ActionListener, WindowListener {
                 currentRowCountForCheck++;
             }
             if (!hasRegistered) {
-                musicFilePath = "エラー.mp3";
+                musicFilePath = "errSound.mp3";
                 this.labelForTemperaMsg.setText("体温記録表が提出されていません。");
             } else {
                 this.labelForTemperaMsg.setText("");
