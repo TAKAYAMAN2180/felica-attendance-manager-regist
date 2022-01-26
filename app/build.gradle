@@ -6,7 +6,6 @@
  * User Manual available at https://docs.gradle.org/7.3.1/userguide/building_java_projects.html
  */
 plugins {
-    // Apply the application plugin to add support yfor building a CLI application in Java.
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.0' // 追加
     id 'java'
