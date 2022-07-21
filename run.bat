@@ -1,4 +1,5 @@
 @echo off
+
 rem 「C:\Program Files (x86)\Sony」の確認
 if not exist "%PROGRAMFILES(X86)%\Sony" (
     echo "sony file not exit"
