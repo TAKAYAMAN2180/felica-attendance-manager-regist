@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="Entry_and_exit_time_management_-_�R�s�[.app.main" target="8" />
       <module name="Entry_and_exit_time_management_-_�R�s�[.app.test" target="8" />
+      <module name="Entry_and_exit_time_management_By_Gradle.app.main" target="8" />
+      <module name="Entry_and_exit_time_management_By_Gradle.app.test" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

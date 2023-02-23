@@ -33,6 +33,7 @@ public class FelicaReader implements Runnable {
         }
         byte[] buf = new byte[16];
         FelicaLib.INSTANCE.felica_read_without_encryption02(felicaHandle, 0x1A8B, 0, (byte) 0x00, buf);
+
         String studentNum = "";
         for (int i = 2; i < buf.length - 3; i++) {
             String temStudentNum = String.format("%02x", buf[i]);

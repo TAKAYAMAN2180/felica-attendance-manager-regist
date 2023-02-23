@@ -245,10 +245,12 @@ public class Main extends JFrame implements ActionListener, WindowListener {
                     }
                     break;
                 }
-                if (getStudentNumOfTemperatureData.equals(studentNum)) {
+                if (getStudentNumOfTemperatureData.equals(String.valueOf(studentNum))) {
                     hasRegistered = true;
                     //学生証番号の一致->msgの出力
                     Cell cellOfMsg = rowToRead.getCell(2);
+                    Cell cell=rowToRead.getCell(1);
+
 
                     String msg = "";
                     try {

@@ -1,18 +1,47 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageProducer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class StartFrame extends JFrame implements ActionListener {
-    private final JList jList;
     private final JLabel labelToShowFilePath;
     private final JLabel labelForMsg;
+    private final JTextField jTextField;
     private String filePath = null;
 
     StartFrame() {
+        //一番最初にROOMIDの一覧を取得する
+        try {
+            URL url = new URL("https://felica-attendance-manager.azurewebsites.net/api/rooms/show");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            StringBuilder result = new StringBuilder();
+            try (BufferedReader bufferedReader = new BufferedReader((new BufferedReader(new InputStreamReader(connection.getInputStream()))))) {
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result.append(line);
+                }
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            Integer[] intArray = mapper.readValue(result.toString(), Integer[].class);
+            System.out.println(intArray);
+        } catch (Exception e) {
+            JOptionPane.showInternalMessageDialog(this.getContentPane(), "データベースとの接続中にエラーが発生しました。" + e.getMessage(),
+                    "エラー", JOptionPane.ERROR_MESSAGE);
+        }
+
+
         Image im = null;
         URL url = this.getClass().getResource("icon.png");
         try {
@@ -23,30 +52,30 @@ public class StartFrame extends JFrame implements ActionListener {
             im = null;
         }
 
-        setTitle("入退出時間管理プログラム");
+        setTitle("Felica出席管理プログラム");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(200, 200, 800, 370);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel label = new JLabel("入退出時間管理プログラム");
+        JLabel label = new JLabel("Felica出席管理プログラム");
         label.setFont(new Font("msgothic.ttc", Font.PLAIN, 30));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(label);
 
         panel.add(new JLabel(" "));
 
-        JLabel labelForChoice = new JLabel("どちらかを選択してください");
+        JLabel labelForChoice = new JLabel("ROOMIDを入力してください");
         labelForChoice.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(labelForChoice);
 
-        String[] args = {"入室", "退出"};
-        this.jList = new JList(args);
-        this.jList.setFixedCellWidth(100);
-        this.jList.setFont(new Font("msgothic.ttc", Font.PLAIN, 30));
-        this.jList.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(this.jList);
+        this.jTextField = new JTextField("");
+        this.jTextField.setFont(new Font("msgothic.ttc", Font.PLAIN, 30));
+        this.jTextField.setPreferredSize(new Dimension(100, 40));
+        this.jTextField.setHorizontalAlignment((int) Component.CENTER_ALIGNMENT);
+        this.jTextField.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(this.jTextField);
 
         panel.add(new JLabel(" "));
 
@@ -100,7 +129,7 @@ public class StartFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "Decide":
+            /*case "Decide":
                 if (this.jList.getSelectedIndex() == -1) {
                     this.labelForMsg.setText("『入室』もしくは『退出』を選択してください。");
                     JOptionPane.showInternalMessageDialog(this.getContentPane(), "入室もしくは退出を選択してください。",
@@ -121,7 +150,7 @@ public class StartFrame extends JFrame implements ActionListener {
                     hasEntrance = false;
                 }
 
-                Main main = new Main(hasEntrance,this.filePath);
+                Main main = new Main(hasEntrance, this.filePath);
                 main.setVisible(true);
                 dispose();
                 break;
@@ -143,7 +172,7 @@ public class StartFrame extends JFrame implements ActionListener {
                     this.labelForMsg.setText("ファイルの読込中に予期せぬエラーが発生しました。もう一度選択してください。");
                 } else if (selected == JFileChooser.CANCEL_OPTION) {
                 }
-                break;
+                break;*/
         }
     }
 }
