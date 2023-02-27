@@ -41,7 +41,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'StartFrame'
+    mainClass = 'Main'
 }
 
 tasks.named('test') {
@@ -58,7 +58,7 @@ java {
 
 jar {
     manifest {
-        attributes('Main-Class': 'StartFrame')
+        attributes('Main-Class': 'Main')
     }
 }
 

@@ -1,9 +1,7 @@
 import org.apache.poi.ss.usermodel.*;
 
-import javax.swing.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class OutputThread implements Runnable {
     private File file;
@@ -36,7 +34,7 @@ public class OutputThread implements Runnable {
 
 
         byte columnNumForTime;
-        if (this.clerk.getHasEntrance()) {
+        if (this.clerk.getEntry()) {
             columnNumForTime = 1;
         } else {
             columnNumForTime = 2;
@@ -46,7 +44,7 @@ public class OutputThread implements Runnable {
             Row row = sheet.getRow(this.count + 1);
 
             Cell cellForStudentNum = row.createCell(0);
-            cellForStudentNum.setCellValue(this.clerk.getStudentNum());
+//            cellForStudentNum.setCellValue(this.clerk.getStudentNum());
 
             Cell cellForTime = row.createCell(columnNumForTime);
             cellForTime.setCellValue(new SimpleDateFormat("kk:mm:ss").format(this.clerk.getTime()));
